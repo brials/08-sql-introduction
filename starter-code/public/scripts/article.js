@@ -105,8 +105,8 @@ Article.prototype.deleteRecord = function(callback) {
 
 Article.prototype.updateRecord = function(callback) {
   $.ajax({
-    url: '/articles/delete',
-    method: 'DELETE',
+    url: '/articles/update',
+    method: 'PUT',
     data: {
       author: this.author,
       authorUrl: this.authorUrl,
