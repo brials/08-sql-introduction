@@ -40,11 +40,29 @@ Article.fetchAll = function(callback) {
   .then(
     function(results) {
       if (results.rows.length) { // If records exist in the DB
-        // TODO: Call loadAll, and pass in the results, then invoke the callback.
+        // Done: Call loadAll, and pass in the results, then invoke the callback.
+        Article.loadAll(results.rows);
+        callback();
       } else { // if NO records exist in the DB
-        // TODO: Make an ajax call to get the json
+        // Done: Make an ajax call to get the json
+        $.getJSON('/data/hackerIpsum.json')
         // THEN() iterate over the results, and create a new Article object for each.
+        .then(function(data){
+          data.forEach(function(item){
+            let article = new Article(item)
+            article.insertRecord();
+          })
+        })
+        .then(function(){
+          // Article.fetchAll(callback)
+        })
+        .catch(function(err){
+          console.error(err);
+        });
           // When that's complete call the insertRecord method for each article you've created.
+          // .then(function(){
+          //
+          // })
         // THEN() invoke fetchAll and pass your callback as an argument
         // Don't forget to CATCH() any errors
       }
