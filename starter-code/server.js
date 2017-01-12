@@ -48,10 +48,10 @@ app.post('/articles/insert', function(request, response) {
     if (err) console.error(err);
 
     client.query(
-      // TODO: Write the SQL query to insert a new record
-      `INSERT INTO articles(title, author, authorUrl, category, publishedOn, body)
+      // Done: Write the SQL query to insert a new record
+      `INSERT INTO articles(title, author, "authorUrl", category, "publishedOn", body)
       VALUES ($1, $2, $3, $4, $5, $6);`,
-      [request.body.title, request.body.author, request.body.authorUrl, request.body.category, request.body.publishedOn, request.body.body], // TODO: Get each value from the request's body
+      [request.body.title, request.body.author, request.body.authorUrl, request.body.category, request.body.publishedOn, request.body.body], // Done: Get each value from the request's body
       function(err) {
         if (err) console.error(err);
         client.end();
